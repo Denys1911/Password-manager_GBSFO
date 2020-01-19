@@ -4,7 +4,30 @@ import * as routes from '../../constants/roures';
 
 import './Header.css';
 
-const Header = () => {
+const Header = ({currentUser}) => {
+    const authLinks = currentUser ? null : (
+        <>
+            <li className="nav-item">
+                <NavLink to={routes.LOGIN} className="nav-link" activeClassName="active-link">
+                    Login
+                </NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink to={routes.REGISTER} className="nav-link" activeClassName="active-link">
+                    Register
+                </NavLink>
+            </li>
+        </>
+    );
+
+    const dashBoardLink = currentUser ? (
+        <li className="nav-item">
+            <NavLink to={routes.DASHBOARD} className="nav-link" activeClassName="active-link">
+                Dashboard
+            </NavLink>
+        </li>
+    ) : null;
+
     return (
         <header className="header">
             <nav className="navbar navbar-expand navbar-dark bg-primary">
@@ -18,21 +41,8 @@ const Header = () => {
                                 Home
                             </NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to={routes.LOGIN} className="nav-link" activeClassName="active-link">
-                                Login
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to={routes.REGISTER} className="nav-link" activeClassName="active-link">
-                                Register
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink to={routes.DASHBOARD} className="nav-link" activeClassName="active-link">
-                                Dashboard
-                            </NavLink>
-                        </li>
+                        {authLinks}
+                        {dashBoardLink}
                     </ul>
                 </div>
             </nav>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../Header/Header";
 import LoginPage from "../../pages/LoginPage";
 import RegisterPage from "../../pages/RegisterPage";
@@ -6,25 +6,34 @@ import DashboardPage from "../../pages/DashboardPage";
 import HomePage from "../../pages/HomePage";
 import ErrorBoundary from "../ErrorBoundary";
 import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+import Firebase from "../../Firebase";
+import FirebaseContext from "../FireBaseContext";
 import * as routes from '../../constants/roures';
 
 import './App.css';
 
 const App = () => {
+    const firebase = new Firebase();
+    const [currentUser, setCurrentUser] = useState(null);
+
+    useEffect(() => {
+        firebase.auth.onAuthStateChanged(setCurrentUser)
+    }, []);
+
     return (
         <ErrorBoundary>
             <Router>
                 <div className="app">
-                    <Header/>
+                    <Header currentUser={currentUser}/>
                     <Route path={routes.HOME} exact component={HomePage}/>
                     <Route path={routes.LOGIN}>
-                        <LoginPage/>
+                        {currentUser ? <Redirect to={routes.DASHBOARD}/> : <LoginPage/>}
                     </Route>
                     <Route path={routes.REGISTER}>
-                        <RegisterPage/>
+                        {currentUser ? <Redirect to={routes.DASHBOARD}/> : <RegisterPage/>}
                     </Route>
                     <Route path={routes.DASHBOARD}>
-                        <DashboardPage/>
+                        {currentUser ? <DashboardPage/> : <Redirect to={routes.LOGIN}/>}
                     </Route>
                 </div>
             </Router>
