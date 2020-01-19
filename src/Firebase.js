@@ -41,4 +41,8 @@ export default class Firebase {
     deleteUser() {
         return this.auth.currentUser.delete();
     }
+
+    getCurrentUsername() {
+        return this.auth.currentUser && this.auth.currentUser.displayName;
+    }
 }

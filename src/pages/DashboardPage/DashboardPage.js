@@ -30,6 +30,9 @@ const DashboardPage = ({history}) => {
     return (
         <>
             <div className="jumbotron d-flex flex-column text-center mb-0 dashboard-page">
+                <h2>
+                    Welcome to your dashboard, <span className="text-success">{firebase.getCurrentUsername()}</span>!
+                </h2>
                 <ul className="list-group">
                     <li className="list-group-item">
                         <PasswordItem/>
