@@ -1,5 +1,6 @@
 .alert.error-message {
-    margin-top: 1rem;
+    width: 20rem;
+    margin: 1.5rem auto;
 }
 
 .alert.alert-dismissible {

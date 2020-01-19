@@ -1,5 +1,6 @@
 import React, {useContext, useState} from "react";
 import FirebaseContext from "../../components/FireBaseContext";
+import ErrorMessage from "../../components/ErrorMessage";
 import {withRouter} from "react-router-dom";
 import {DASHBOARD} from "../../constants/roures";
 
@@ -10,15 +11,21 @@ const RegisterPage = ({history}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const handleRegistration = async e => {
         e.preventDefault();
+        
+        if (!name) {
+            setErrorMessage('Fill all fields, please');
+            return;
+        }
 
         try {
             await firebase.register(name, email, password);
             history.push(DASHBOARD);
         } catch (e) {
-            alert(e.message);
+            setErrorMessage(e.message);
         }
     };
 
@@ -49,6 +56,7 @@ const RegisterPage = ({history}) => {
                 </label>
                 <input className="btn btn-outline-success col-4 mx-auto mt-3" type="submit"/>
             </form>
+            {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
         </div>
     )
 };

@@ -1,5 +1,6 @@
 import React, {useContext, useState} from "react";
 import FirebaseContext from "../../components/FireBaseContext";
+import ErrorMessage from "../../components/ErrorMessage";
 import {withRouter} from "react-router-dom";
 import {DASHBOARD} from "../../constants/roures";
 
@@ -9,6 +10,7 @@ const LoginPage = ({history}) => {
     const firebase = useContext(FirebaseContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const handleLogin = async e => {
         e.preventDefault();
@@ -17,7 +19,7 @@ const LoginPage = ({history}) => {
             await firebase.login(email, password);
             history.push(DASHBOARD);
         } catch (e) {
-            alert(e.message);
+            setErrorMessage(e.message);
         }
     };
 
@@ -41,6 +43,7 @@ const LoginPage = ({history}) => {
                 </label>
                 <input className="btn btn-outline-success col-4 mx-auto mt-3" type="submit"/>
             </form>
+            {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
         </div>
     )
 };
