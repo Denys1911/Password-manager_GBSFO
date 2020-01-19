@@ -22,21 +22,23 @@ const App = () => {
 
     return (
         <ErrorBoundary>
-            <Router>
-                <div className="app">
-                    <Header currentUser={currentUser}/>
-                    <Route path={routes.HOME} exact component={HomePage}/>
-                    <Route path={routes.LOGIN}>
-                        {currentUser ? <Redirect to={routes.DASHBOARD}/> : <LoginPage/>}
-                    </Route>
-                    <Route path={routes.REGISTER}>
-                        {currentUser ? <Redirect to={routes.DASHBOARD}/> : <RegisterPage/>}
-                    </Route>
-                    <Route path={routes.DASHBOARD}>
-                        {currentUser ? <DashboardPage/> : <Redirect to={routes.LOGIN}/>}
-                    </Route>
-                </div>
-            </Router>
+            <FirebaseContext.Provider value={firebase}>
+                <Router>
+                    <div className="app">
+                        <Header currentUser={currentUser}/>
+                        <Route path={routes.HOME} exact component={HomePage}/>
+                        <Route path={routes.LOGIN}>
+                            {currentUser ? <Redirect to={routes.DASHBOARD}/> : <LoginPage/>}
+                        </Route>
+                        <Route path={routes.REGISTER}>
+                            {currentUser ? <Redirect to={routes.DASHBOARD}/> : <RegisterPage/>}
+                        </Route>
+                        <Route path={routes.DASHBOARD}>
+                            {currentUser ? <DashboardPage/> : <Redirect to={routes.LOGIN}/>}
+                        </Route>
+                    </div>
+                </Router>
+            </FirebaseContext.Provider>
         </ErrorBoundary>
     );
 };
