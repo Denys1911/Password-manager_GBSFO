@@ -27,16 +27,27 @@ const DashboardPage = () => {
 
     const handleNewPasswordCreation = (accountName, password) => {
         setData(currentData => {
-            return currentData ? [...currentData, {accountName, password}] : [{accountName, password}]
+            const newPasswordObj = {
+                accountName,
+                password,
+                id: Math.random().toString(36).substr(2, 9) // to get random id
+            };
+
+            return currentData ? [...currentData, newPasswordObj] : [newPasswordObj]
         });
+    };
+    
+    const handlePasswordDeletion = id => {
+        setData(currentData => currentData.filter(item => item.id !== id));
     };
 
     const allPasswords = data && data.length ?
-        data.map((item, id) => (
-        <li key={id} className="list-group-item">
-            <PasswordItem data={item}/>
-        </li>
-    )) : <li className="list-group-item empty-data">No passwords available yet</li>;
+        data.map(({id, ...rest}) => (
+            <li key={id} className="list-group-item">
+                <PasswordItem data={rest}
+                              onPasswordDelete={() => handlePasswordDeletion(id)}/>
+            </li>
+        )) : <li className="list-group-item empty-data">No passwords available yet</li>;
 
     return (
         <>

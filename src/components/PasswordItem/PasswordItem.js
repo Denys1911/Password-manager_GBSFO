@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import './PasswordItem.css';
 
-const PasswordItem = ({data}) => {
+const PasswordItem = ({data, onPasswordDelete}) => {
     const [accountName, setAccountName] = useState(data.accountName);
     const [password, setPassword] = useState(data.password);
     const [passwordInputType, setPasswordInputType] = useState('password');
@@ -36,7 +36,10 @@ const PasswordItem = ({data}) => {
             <div className="d-flex justify-content-center password-item-buttons">
                 {changeInputTypeBtn}
                 <input className="btn btn-outline-info" type="button" value="Update"/>
-                <input className="btn btn-outline-warning" type="button" value="Delete"/>
+                <input className="btn btn-outline-warning"
+                       type="button"
+                       value="Delete"
+                       onClick={() => onPasswordDelete()}/>
             </div>
         </form>
     );
