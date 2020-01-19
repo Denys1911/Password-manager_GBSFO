@@ -1,0 +1,31 @@
+.header a {
+    transition: all .25s ease;
+}
+
+.nav-item {
+    padding: .6rem .9rem;
+}
+
+.header-title {
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 700px) {
+    .header .collapse {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .header-list {
+        display: flex;
+        flex-direction: column !important;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 701px) {
+    .header-title {
+        margin-right: 3rem;
+    }
+}

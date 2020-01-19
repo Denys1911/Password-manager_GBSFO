@@ -11,6 +11,8 @@ export default class ErrorBoundary extends Component {
     }
 
     render() {
-        return this.state.hasError ? <ErrorMessage/> : this.props.children;
+        return this.state.hasError ?
+            <ErrorMessage message="Ups... Something went wrong, please try again later"/>
+            : this.props.children;
     }
 }
