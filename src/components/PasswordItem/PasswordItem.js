@@ -2,20 +2,21 @@ import React from "react";
 
 import './PasswordItem.css';
 
-const PasswordItem = () => {
+const PasswordItem = ({data}) => {
     return (
         <form className="password-item">
             <label>
                 Account name:
                 <input className="form-control"
                        type="text"
-
+                       value={data.accountName}
                 />
             </label>
             <label>
                 Password:
                 <input className="form-control"
                        type="password"
+                       value={data.password}
                 />
             </label>
             <div className="d-flex justify-content-center password-item-buttons">

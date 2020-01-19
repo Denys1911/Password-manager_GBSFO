@@ -43,7 +43,7 @@
     width: 130px;
     height: 130px;
     overflow: hidden;
-    background: #fff;
+    background: transparent;
 }
 .spinner-inner {
     width: 100%;

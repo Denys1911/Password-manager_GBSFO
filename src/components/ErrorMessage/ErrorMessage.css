@@ -1,3 +1,7 @@
 .alert.error-message {
-    padding: 2rem;
+    margin-top: 1rem;
+}
+
+.alert.alert-dismissible {
+    padding-right: 1.2rem;
 }

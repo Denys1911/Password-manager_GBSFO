@@ -39,10 +39,24 @@ export default class Firebase {
     }
 
     deleteUser() {
+        this.db.collection('users').doc(this.auth.currentUser.uid).delete();
+
         return this.auth.currentUser.delete();
     }
 
     getCurrentUsername() {
         return this.auth.currentUser && this.auth.currentUser.displayName;
+    }
+
+    async getCurrentUserPasswords() {
+        const passwords = await this.db.collection('users').doc(this.auth.currentUser.uid).get();
+
+        return passwords.get('passwords');
+    }
+
+    setUserPasswords(passwords) {
+        return this.db.collection('users').doc(this.auth.currentUser.uid).set(
+            {passwords}
+        )
     }
 }

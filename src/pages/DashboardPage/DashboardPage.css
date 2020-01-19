@@ -12,6 +12,10 @@
     margin: 1rem;
 }
 
+.list-group {
+    min-height: 10rem;
+}
+
 .list-group-item {
     margin: .7rem 0;
     border-radius: 1.5rem;
@@ -25,4 +29,16 @@
 .list-group .list-group-item:last-child {
     border-bottom-right-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
+}
+
+.horizontal {
+    margin: 2rem auto;
+    width: 70vw;
+    height: 1px;
+    background-color: #2C3E50;
+}
+
+.empty-data {
+    margin-top: 4rem;
+    font-size: 1.3rem;
 }

@@ -23,7 +23,7 @@ const App = () => {
             setLoadingStatus(false);
             setCurrentUser(user);
         });
-    }, []);
+    }, [firebase.auth]);
 
     return !loadingStatus ? (
         <ErrorBoundary>
