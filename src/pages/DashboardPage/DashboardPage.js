@@ -1,14 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
 import PasswordItem from "../../components/PasswordItem";
-import FirebaseContext from "../../components/FireBaseContext";
-import {withRouter} from "react-router-dom";
-import {HOME} from "../../constants/roures";
 import Spinner from "../../components/Spinner";
+import NewPasswordForm from "../../components/NewPasswordForm";
+import UserControls from "../../components/UserControls";
+import FirebaseContext from "../../components/FireBaseContext";
 
 import './DashboardPage.css';
-import NewPasswordForm from "../../components/NewPasswordForm";
 
-const DashboardPage = ({history}) => {
+const DashboardPage = () => {
     const firebase = useContext(FirebaseContext);
     const [isDataReceived, setIsDataReceived] = useState(false);
     const [data, setData] = useState([]);
@@ -26,31 +25,14 @@ const DashboardPage = ({history}) => {
         }
     }, [data, isDataReceived, firebase]);
 
-    const handleLogout = async () => {
-        try {
-            await firebase.logout();
-            history.push(HOME);
-        } catch (e) {
-            alert(e.message)
-        }
-    };
-
-    const handleUserDeletion = async () => {
-        try {
-            await firebase.deleteUser();
-            history.push(HOME);
-        } catch (e) {
-            alert(e.message)
-        }
-    };
-
     const handleNewPasswordCreation = (accountName, password) => {
         setData(currentData => {
             return currentData ? [...currentData, {accountName, password}] : [{accountName, password}]
         });
     };
 
-    const allPasswords = data && data.length ? data.map((item, id) => (
+    const allPasswords = data && data.length ?
+        data.map((item, id) => (
         <li key={id} className="list-group-item">
             <PasswordItem data={item}/>
         </li>
@@ -58,7 +40,7 @@ const DashboardPage = ({history}) => {
 
     return (
         <>
-            <div className="jumbotron d-flex flex-column text-center mb-0 dashboard-page">
+            <div className="jumbotron d-flex flex-column text-center mb-0 dashboard">
                 <h2>
                     Welcome to your dashboard, <span className="text-success">{firebase.getCurrentUsername()}</span>!
                 </h2>
@@ -68,16 +50,9 @@ const DashboardPage = ({history}) => {
                 <hr className="horizontal"/>
                 <NewPasswordForm onPasswordCreate={handleNewPasswordCreation}/>
             </div>
-            <div className="text-center dashboard-btn-group">
-                <button className="btn btn-info" onClick={handleLogout}>
-                    Logout
-                </button>
-                <button className="btn btn-danger" onClick={handleUserDeletion}>
-                    Delete account
-                </button>
-            </div>
+            <UserControls/>
         </>
     )
 };
 
-export default withRouter(DashboardPage);
+export default DashboardPage;
