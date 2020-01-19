@@ -1,7 +1,7 @@
 import React, {useState} from "react";
+import ErrorMessage from "../ErrorMessage";
 
 import './NewPasswordForm.css';
-import ErrorMessage from "../ErrorMessage";
 
 const NewPasswordForm = ({onPasswordCreate}) => {
     const [accountName, setAccountName] = useState('');

@@ -36,7 +36,13 @@ const DashboardPage = () => {
             return currentData ? [...currentData, newPasswordObj] : [newPasswordObj]
         });
     };
-    
+
+    const handlePasswordUpdate = id => (accountName, password) => {
+        setData(currentData => currentData.map(item => {
+            return item.id === id ? {id, accountName, password} : item;
+        }));
+    };
+
     const handlePasswordDeletion = id => {
         setData(currentData => currentData.filter(item => item.id !== id));
     };
@@ -45,6 +51,7 @@ const DashboardPage = () => {
         data.map(({id, ...rest}) => (
             <li key={id} className="list-group-item">
                 <PasswordItem data={rest}
+                              onPasswordUpdate={handlePasswordUpdate(id)}
                               onPasswordDelete={() => handlePasswordDeletion(id)}/>
             </li>
         )) : <li className="list-group-item empty-data">No passwords available yet</li>;
