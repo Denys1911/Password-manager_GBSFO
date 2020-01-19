@@ -4,6 +4,7 @@ import LoginPage from "../../pages/LoginPage";
 import RegisterPage from "../../pages/RegisterPage";
 import DashboardPage from "../../pages/DashboardPage";
 import HomePage from "../../pages/HomePage";
+import Spinner from "../Spinner";
 import ErrorBoundary from "../ErrorBoundary";
 import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
 import Firebase from "../../Firebase";
@@ -14,13 +15,17 @@ import './App.css';
 
 const App = () => {
     const firebase = new Firebase();
+    const [loadingStatus, setLoadingStatus] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        firebase.auth.onAuthStateChanged(setCurrentUser)
+        firebase.auth.onAuthStateChanged(user => {
+            setLoadingStatus(false);
+            setCurrentUser(user);
+        });
     }, []);
 
-    return (
+    return !loadingStatus ? (
         <ErrorBoundary>
             <FirebaseContext.Provider value={firebase}>
                 <Router>
@@ -40,7 +45,7 @@ const App = () => {
                 </Router>
             </FirebaseContext.Provider>
         </ErrorBoundary>
-    );
+    ) : <Spinner/>;
 };
 
 export default App;
