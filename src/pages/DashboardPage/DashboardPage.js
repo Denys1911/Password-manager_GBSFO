@@ -18,7 +18,7 @@ const DashboardPage = () => {
                 .then(data => {
                     data = Array.isArray(data) ? data : [];
                     setData(data);
-                    setIsDataReceived(true)
+                    setIsDataReceived(true);
                 });
         } else {
             firebase.setUserPasswords(data);
