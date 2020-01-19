@@ -1,4 +1,6 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
+import * as routes from '../../constants/roures';
 
 import './Header.css';
 
@@ -12,16 +14,24 @@ const Header = () => {
                     </h1>
                     <ul className="navbar-nav header-list">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Home</a>
+                            <NavLink to={routes.HOME} exact className="nav-link" activeClassName="active-link">
+                                Home
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Login</a>
+                            <NavLink to={routes.LOGIN} className="nav-link" activeClassName="active-link">
+                                Login
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Register</a>
+                            <NavLink to={routes.REGISTER} className="nav-link" activeClassName="active-link">
+                                Register
+                            </NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Dashboard</a>
+                            <NavLink to={routes.DASHBOARD} className="nav-link" activeClassName="active-link">
+                                Dashboard
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
