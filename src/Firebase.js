@@ -14,7 +14,10 @@ const config = {
 
 export default class Firebase {
     constructor() {
-        app.initializeApp(config);
+        if (!app.apps.length) {
+            app.initializeApp(config)
+        }
+
         this.auth = app.auth();
         this.db = app.firestore();
     }
@@ -36,6 +39,6 @@ export default class Firebase {
     }
 
     deleteUser() {
-        return this.auth.deleteUser();
+        return this.auth.currentUser.delete();
     }
 }

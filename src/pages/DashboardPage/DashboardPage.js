@@ -1,9 +1,32 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import PasswordItem from "../../components/PasswordItem";
+import FirebaseContext from "../../components/FireBaseContext";
+import {withRouter} from "react-router-dom";
+import {HOME} from "../../constants/roures";
 
 import './DashboardPage.css';
 
-const DashboardPage = () => {
+const DashboardPage = ({history}) => {
+    const firebase = useContext(FirebaseContext);
+
+    const handleLogout = async () => {
+        try {
+            await firebase.logout();
+            history.push(HOME);
+        } catch (e) {
+            alert(e.message)
+        }
+    };
+
+    const handleUserDeletion = async () => {
+        try {
+            await firebase.deleteUser();
+            history.push(HOME);
+        } catch (e) {
+            alert(e.message)
+        }
+    };
+
     return (
         <>
             <div className="jumbotron d-flex flex-column text-center mb-0 dashboard-page">
@@ -23,10 +46,10 @@ const DashboardPage = () => {
                 </button>
             </div>
             <div className="text-center dashboard-btn-group">
-                <button className="btn btn-info">
+                <button className="btn btn-info" onClick={handleLogout}>
                     Logout
                 </button>
-                <button className="btn btn-danger">
+                <button className="btn btn-danger" onClick={handleUserDeletion}>
                     Delete account
                 </button>
             </div>
@@ -34,4 +57,4 @@ const DashboardPage = () => {
     )
 };
 
-export default DashboardPage;
+export default withRouter(DashboardPage);
