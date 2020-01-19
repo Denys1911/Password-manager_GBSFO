@@ -2,6 +2,7 @@ import React, {useContext, useState} from "react";
 import FirebaseContext from "../../components/FireBaseContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import {withRouter} from "react-router-dom";
+import {PropTypes} from "prop-types";
 import {DASHBOARD} from "../../constants/roures";
 
 import './RegisterPage.css';
@@ -11,11 +12,12 @@ const RegisterPage = ({history}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleRegistration = async e => {
         e.preventDefault();
-        
+        setErrorMessage('');
+
         if (!name) {
             setErrorMessage('Fill all fields, please');
             return;
@@ -58,7 +60,11 @@ const RegisterPage = ({history}) => {
             </form>
             {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
         </div>
-    )
+    );
+};
+
+RegisterPage.propTypes = {
+    history: PropTypes.object
 };
 
 export default withRouter(RegisterPage);

@@ -1,16 +1,17 @@
 import React, {useState} from "react";
 import ErrorMessage from "../ErrorMessage";
+import {PropTypes} from "prop-types";
 
 import './NewPasswordForm.css';
 
 const NewPasswordForm = ({onPasswordCreate}) => {
     const [accountName, setAccountName] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = e => {
         e.preventDefault();
-        setErrorMessage(null);
+        setErrorMessage('');
 
         if (!(accountName && password)) {
             setErrorMessage('Fill all fields, please');
@@ -45,6 +46,10 @@ const NewPasswordForm = ({onPasswordCreate}) => {
              {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
         </form>
     )
+};
+
+NewPasswordForm.propTypes = {
+    onPasswordCreate: PropTypes.func
 };
 
 export default NewPasswordForm;

@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import FirebaseContext from "../../components/FireBaseContext";
 import ErrorMessage from "../../components/ErrorMessage";
+import {PropTypes} from "prop-types";
 import {withRouter} from "react-router-dom";
 import {DASHBOARD} from "../../constants/roures";
 
@@ -10,10 +11,11 @@ const LoginPage = ({history}) => {
     const firebase = useContext(FirebaseContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = async e => {
         e.preventDefault();
+        setErrorMessage('');
 
         try {
             await firebase.login(email, password);
@@ -46,6 +48,10 @@ const LoginPage = ({history}) => {
             {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
         </div>
     )
+};
+
+LoginPage.propTypes = {
+    history: PropTypes.object
 };
 
 export default withRouter(LoginPage);

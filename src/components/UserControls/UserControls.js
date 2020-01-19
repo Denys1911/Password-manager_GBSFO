@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import {withRouter} from "react-router-dom";
+import {PropTypes} from "prop-types";
 import FirebaseContext from "../FireBaseContext";
 import {HOME} from "../../constants/roures";
 
@@ -36,6 +37,10 @@ const UserControls = ({history}) => {
             </button>
         </div>
     )
+};
+
+UserControls.propTypes = {
+    history: PropTypes.object
 };
 
 export default withRouter(UserControls);

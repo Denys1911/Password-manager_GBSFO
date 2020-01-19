@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import ErrorMessage from "../ErrorMessage";
+import {PropTypes} from "prop-types";
 
 import './PasswordItem.css';
 
@@ -7,12 +8,12 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
     const [accountName, setAccountName] = useState(data.accountName);
     const [password, setPassword] = useState(data.password);
     const [passwordInputType, setPasswordInputType] = useState('password');
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = e => {
         e.preventDefault();
 
-        setErrorMessage(null);
+        setErrorMessage('');
 
         if (!(accountName && password)) {
             setErrorMessage('Fill all fields, please');
@@ -61,6 +62,12 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
             {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
         </form>
     );
+};
+
+PasswordItem.propTypes = {
+    data: PropTypes.object,
+    onPasswordDelete: PropTypes.func,
+    onPasswordUpdate: PropTypes.func
 };
 
 export default PasswordItem;
