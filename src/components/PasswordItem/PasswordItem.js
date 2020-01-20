@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import ErrorMessage from "../ErrorMessage";
+import {usePasswordType} from "../customHooks/usePasswordType";
 import {PropTypes} from "prop-types";
 
 import './PasswordItem.css';
@@ -7,8 +8,8 @@ import './PasswordItem.css';
 const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
     const [accountName, setAccountName] = useState(data.accountName);
     const [password, setPassword] = useState(data.password);
-    const [passwordInputType, setPasswordInputType] = useState('password');
     const [errorMessage, setErrorMessage] = useState('');
+    const {passwordInputType, changeInputTypeBtn} = usePasswordType();
 
     const onSubmit = e => {
         e.preventDefault();
@@ -22,16 +23,6 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
 
         onPasswordUpdate(accountName, password);
     };
-
-    const changeInputTypeBtn = passwordInputType === 'password' ?
-        <input className="btn btn-outline-secondary"
-               type="button"
-               value="Reveal password"
-               onClick={() => setPasswordInputType('text')}/>
-        : <input className="btn btn-outline-secondary"
-                 type="button"
-                 value="Hide password"
-                 onClick={() => setPasswordInputType('password')}/>;
 
     return (
         <form className="password-item" onSubmit={onSubmit}>

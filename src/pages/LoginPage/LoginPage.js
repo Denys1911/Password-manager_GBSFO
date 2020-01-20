@@ -1,4 +1,5 @@
 import React, {useContext, useState} from "react";
+import {usePasswordType} from "../../components/customHooks/usePasswordType";
 import FirebaseContext from "../../components/FireBaseContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import {PropTypes} from "prop-types";
@@ -12,6 +13,7 @@ const LoginPage = ({history}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const {passwordInputType, changeInputTypeBtn} = usePasswordType();
 
     const handleLogin = async e => {
         e.preventDefault();
@@ -39,11 +41,12 @@ const LoginPage = ({history}) => {
                 <label>
                     Password:
                     <input className="form-control"
-                           type="password"
+                           type={passwordInputType}
                            value={password}
                            onChange={e => setPassword(e.target.value)}/>
                 </label>
-                <input className="btn btn-outline-success col-4 mx-auto mt-3" type="submit"/>
+                {changeInputTypeBtn}
+                <input className="btn btn-outline-success mx-auto" type="submit"/>
             </form>
             {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
         </div>

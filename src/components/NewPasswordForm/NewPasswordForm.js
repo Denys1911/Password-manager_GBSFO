@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {usePasswordType} from "../customHooks/usePasswordType";
 import ErrorMessage from "../ErrorMessage";
 import {PropTypes} from "prop-types";
 
@@ -8,6 +9,7 @@ const NewPasswordForm = ({onPasswordCreate}) => {
     const [accountName, setAccountName] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const {passwordInputType, changeInputTypeBtn} = usePasswordType();
 
     const onSubmit = e => {
         e.preventDefault();
@@ -36,10 +38,11 @@ const NewPasswordForm = ({onPasswordCreate}) => {
             <label>
                 Password:
                 <input className="form-control"
-                       type="password"
+                       type={passwordInputType}
                        value={password}
                        onChange={e => setPassword(e.target.value)}/>
             </label>
+            {changeInputTypeBtn}
             <input className="btn btn-outline-primary col-md-6"
                    type="submit"
                    value="Add new password"/>

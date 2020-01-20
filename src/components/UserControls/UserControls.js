@@ -12,6 +12,8 @@ const UserControls = ({history}) => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleClick = async (func) => {
+        setErrorMessage('');
+
         try {
             await func();
             history.push(HOME);
