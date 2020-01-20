@@ -3,7 +3,7 @@ import {withRouter} from "react-router-dom";
 import ErrorMessage from "../ErrorMessage";
 import {PropTypes} from "prop-types";
 import FirebaseContext from "../FireBaseContext";
-import {HOME} from "../../constants/roures";
+import {HOME} from "../../constants/routes";
 
 import './UserControls.css';
 

@@ -4,7 +4,7 @@ import FirebaseContext from "../../components/FireBaseContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import {PropTypes} from "prop-types";
 import {withRouter} from "react-router-dom";
-import {DASHBOARD} from "../../constants/roures";
+import {DASHBOARD} from "../../constants/routes";
 
 import './LoginPage.css';
 

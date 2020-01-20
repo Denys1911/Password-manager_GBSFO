@@ -9,7 +9,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
 import Firebase from "../../Firebase";
 import FirebaseContext from "../FireBaseContext";
-import * as routes from '../../constants/roures';
+import * as routes from '../../constants/routes';
 
 import './App.css';
 
