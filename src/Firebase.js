@@ -26,9 +26,9 @@ export default class Firebase {
         return this.auth.signInWithEmailAndPassword(email, password);
     }
 
-    logout() {
-        this.auth.signOut();
-    }
+    logout = () => {
+        return this.auth.signOut();
+    };
 
     async register(name, email, password) {
         await this.auth.createUserWithEmailAndPassword(email, password);
@@ -38,11 +38,11 @@ export default class Firebase {
         });
     }
 
-    deleteUser() {
-        this.db.collection('users').doc(this.auth.currentUser.uid).delete();
+    deleteUser = async () => {
+        await this.db.collection('users').doc(this.auth.currentUser.uid).delete();
 
         return this.auth.currentUser.delete();
-    }
+    };
 
     getCurrentUsername() {
         return this.auth.currentUser && this.auth.currentUser.displayName;

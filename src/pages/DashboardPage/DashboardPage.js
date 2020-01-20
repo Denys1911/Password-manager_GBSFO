@@ -53,8 +53,8 @@ const DashboardPage = () => {
                 <PasswordItem data={rest}
                               onPasswordUpdate={handlePasswordUpdate(id)}
                               onPasswordDelete={() => handlePasswordDeletion(id)}/>
-            </li>
-        )) : <li className="list-group-item empty-data">No passwords available yet</li>;
+            </li>)
+        ) : <li className="list-group-item empty-data">No passwords available yet</li>;
 
     return (
         <>
