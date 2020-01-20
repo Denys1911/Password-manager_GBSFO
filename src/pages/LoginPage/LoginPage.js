@@ -13,7 +13,7 @@ const LoginPage = ({history}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const {passwordInputType, changeInputTypeBtn} = usePasswordType();
+    const {passwordInputType, inputTypeChangingBtn} = usePasswordType();
 
     const handleLogin = async e => {
         e.preventDefault();
@@ -45,7 +45,7 @@ const LoginPage = ({history}) => {
                            value={password}
                            onChange={e => setPassword(e.target.value)}/>
                 </label>
-                {changeInputTypeBtn}
+                {inputTypeChangingBtn}
                 <input className="btn btn-outline-success mx-auto" type="submit"/>
             </form>
             {errorMessage ? <ErrorMessage message={errorMessage}/> : null}

@@ -18,8 +18,8 @@ export const usePasswordType = () => {
                onClick={fn}/>
     );
 
-    const changeInputTypeBtn = passwordInputType === 'password' ? getBtn(setTypeText, 'Reveal password')
+    const inputTypeChangingBtn = passwordInputType === 'password' ? getBtn(setTypeText, 'Reveal password')
         : getBtn(setTypePassword, 'Hide password');
 
-    return {passwordInputType, changeInputTypeBtn};
+    return {passwordInputType, inputTypeChangingBtn};
 };

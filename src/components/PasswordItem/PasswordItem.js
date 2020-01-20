@@ -9,7 +9,7 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
     const [accountName, setAccountName] = useState(data.accountName);
     const [password, setPassword] = useState(data.password);
     const [errorMessage, setErrorMessage] = useState('');
-    const {passwordInputType, changeInputTypeBtn} = usePasswordType();
+    const {passwordInputType, inputTypeChangingBtn} = usePasswordType();
 
     const onSubmit = e => {
         e.preventDefault();
@@ -41,7 +41,7 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
                        onChange={e => setPassword(e.target.value)}/>
             </label>
             <div className="d-flex justify-content-center password-item-buttons">
-                {changeInputTypeBtn}
+                {inputTypeChangingBtn}
                 <input className="btn btn-outline-info"
                        type="submit"
                        value="Update"/>

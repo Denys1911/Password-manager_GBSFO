@@ -9,7 +9,7 @@ const NewPasswordForm = ({onPasswordCreate}) => {
     const [accountName, setAccountName] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const {passwordInputType, changeInputTypeBtn} = usePasswordType();
+    const {passwordInputType, inputTypeChangingBtn} = usePasswordType();
 
     const onSubmit = e => {
         e.preventDefault();
@@ -42,7 +42,7 @@ const NewPasswordForm = ({onPasswordCreate}) => {
                        value={password}
                        onChange={e => setPassword(e.target.value)}/>
             </label>
-            {changeInputTypeBtn}
+            {inputTypeChangingBtn}
             <input className="btn btn-outline-primary col-md-6"
                    type="submit"
                    value="Add new password"/>
