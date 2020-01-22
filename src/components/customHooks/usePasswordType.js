@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
-const usePasswordType = () => {
-    const [passwordInputType, setPasswordInputType] = useState('password');
+const usePasswordType = initialType => {
+    const [passwordInputType, setPasswordInputType] = useState(initialType);
 
     const setTypePassword = () => {
         setPasswordInputType('password');

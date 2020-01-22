@@ -9,7 +9,7 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
     const [accountName, controlAccountName] = useInput(data.accountName);
     const [password, controlPassword] = useInput(data.password);
     const [errorMessage, setErrorMessage] = useState('');
-    const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
+    const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const onSubmit = e => {
         e.preventDefault();

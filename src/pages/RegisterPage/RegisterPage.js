@@ -14,7 +14,7 @@ const RegisterPage = ({history}) => {
     const [email, emailControl] = useInput('');
     const [password, passwordControl] = useInput('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
+    const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const handleRegistration = async e => {
         e.preventDefault();

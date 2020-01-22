@@ -13,7 +13,7 @@ const LoginPage = ({history}) => {
     const [email, emailControl] = useInput('');
     const [password, passwordControl] = useInput('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
+    const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const handleLogin = async e => {
         e.preventDefault();

@@ -9,7 +9,7 @@ const NewPasswordForm = ({onPasswordCreate}) => {
     const [accountName, controlAccountName, resetAccountName] = useInput('');
     const [password, controlPassword, resetPassword] = useInput('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
+    const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const onSubmit = e => {
         e.preventDefault();
