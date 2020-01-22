@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import PasswordItem from "../../components/PasswordItem";
 import Spinner from "../../components/Spinner";
+import ErrorMessage from "../../components/ErrorMessage";
 import NewPasswordForm from "../../components/NewPasswordForm";
 import UserControls from "../../components/UserControls";
 import FirebaseContext from "../../components/FireBaseContext";
@@ -10,6 +11,7 @@ import './DashboardPage.css';
 const DashboardPage = () => {
     const firebase = useContext(FirebaseContext);
     const [isDataReceived, setIsDataReceived] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -19,7 +21,8 @@ const DashboardPage = () => {
                     data = Array.isArray(data) ? data : [];
                     setData(data);
                     setIsDataReceived(true);
-                });
+                })
+                .catch(err => setErrorMessage(err));
         } else {
             firebase.setUserPasswords(data);
         }
@@ -62,12 +65,12 @@ const DashboardPage = () => {
                 Welcome to your dashboard, <span className="text-success">{firebase.getCurrentUsername()}</span>!
             </h2>
             <ul className="list-group">
-                {isDataReceived ? allPasswords : <Spinner/>}
+                {allPasswords}
             </ul>
         </>
     );
 
-    return (
+    return !errorMessage ? (
         <>
             <div className="jumbotron d-flex flex-column text-center mb-0 dashboard">
                 <div className="dashboard-panel">
@@ -78,7 +81,7 @@ const DashboardPage = () => {
             </div>
             <UserControls/>
         </>
-    )
+    ) : <ErrorMessage message={errorMessage}/>
 };
 
 export default DashboardPage;
