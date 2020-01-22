@@ -54,17 +54,25 @@ const DashboardPage = () => {
                               onPasswordUpdate={handlePasswordUpdate(id)}
                               onPasswordDelete={() => handlePasswordDeletion(id)}/>
             </li>)
-        ) : <li className="list-group-item empty-data">No passwords available yet</li>;
+        ) : <li className="list-group-item empty-data">No passwords created yet</li>;
+
+    const dashboardPanel = !isDataReceived ? <Spinner/> : (
+        <>
+            <h2>
+                Welcome to your dashboard, <span className="text-success">{firebase.getCurrentUsername()}</span>!
+            </h2>
+            <ul className="list-group">
+                {isDataReceived ? allPasswords : <Spinner/>}
+            </ul>
+        </>
+    );
 
     return (
         <>
             <div className="jumbotron d-flex flex-column text-center mb-0 dashboard">
-                <h2>
-                    Welcome to your dashboard, <span className="text-success">{firebase.getCurrentUsername()}</span>!
-                </h2>
-                <ul className="list-group">
-                    {isDataReceived ? allPasswords : <Spinner/>}
-                </ul>
+                <div className="dashboard-panel">
+                    {dashboardPanel}
+                </div>
                 <hr className="horizontal"/>
                 <NewPasswordForm onPasswordCreate={handleNewPasswordCreation}/>
             </div>

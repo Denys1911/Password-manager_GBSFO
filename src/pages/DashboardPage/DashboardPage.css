@@ -12,8 +12,8 @@
     margin: 1rem;
 }
 
-.list-group {
-    min-height: 10rem;
+.dashboard-panel {
+    min-height: 15rem;
 }
 
 .list-group-item {
