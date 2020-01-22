@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import {usePasswordType} from "../customHooks/usePasswordType";
-import {useInput} from "../customHooks/useInput";
+import {useInput, usePasswordType} from "../customHooks";
 import ErrorMessage from "../ErrorMessage";
 import {PropTypes} from "prop-types";
 

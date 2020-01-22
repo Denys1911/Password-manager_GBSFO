@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-export const useInput = initialValue => {
+const useInput = initialValue => {
     const [value, setValue] = useState(initialValue);
 
     const resetValue = () => {
@@ -16,3 +16,5 @@ export const useInput = initialValue => {
 
     return [value, inputControl, resetValue];
 };
+
+export default useInput;

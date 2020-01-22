@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-export const usePasswordType = () => {
+const usePasswordType = () => {
     const [passwordInputType, setPasswordInputType] = useState('password');
 
     const setTypePassword = () => {
@@ -23,3 +23,5 @@ export const usePasswordType = () => {
 
     return [passwordInputType, inputTypeChangingBtn];
 };
+
+export default usePasswordType;

@@ -1,11 +1,10 @@
 import React, {useContext, useState} from "react";
-import {usePasswordType} from "../../components/customHooks/usePasswordType";
+import {useInput, usePasswordType} from "../../components/customHooks";
 import FirebaseContext from "../../components/FireBaseContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import {PropTypes} from "prop-types";
 import {withRouter} from "react-router-dom";
 import {DASHBOARD} from "../../constants/routes";
-import {useInput} from "../../components/customHooks/useInput";
 
 import './LoginPage.css';
 
