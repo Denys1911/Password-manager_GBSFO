@@ -1,6 +1,5 @@
-import React, {useState} from "react";
-import {useInput, usePasswordType} from "../customHooks";
-import ErrorMessage from "../ErrorMessage";
+import React from "react";
+import {useErrorMessage, useInput, usePasswordType} from "../customHooks";
 import {PropTypes} from "prop-types";
 
 import './NewPasswordForm.css';
@@ -8,12 +7,12 @@ import './NewPasswordForm.css';
 const NewPasswordForm = ({onPasswordCreate}) => {
     const [accountName, controlAccountName, resetAccountName] = useInput('');
     const [password, controlPassword, resetPassword] = useInput('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const onSubmit = e => {
         e.preventDefault();
-        setErrorMessage('');
+        resetErrorMessage();
 
         if (!(accountName && password)) {
             setErrorMessage('Fill all fields, please');
@@ -44,7 +43,7 @@ const NewPasswordForm = ({onPasswordCreate}) => {
             <input className="btn btn-outline-primary col-md-6"
                    type="submit"
                    value="Add new password"/>
-             {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+             {errorMessage}
         </form>
     )
 };

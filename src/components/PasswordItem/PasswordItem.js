@@ -1,6 +1,5 @@
-import React, {useState} from "react";
-import {useInput, usePasswordType} from "../customHooks";
-import ErrorMessage from "../ErrorMessage";
+import React from "react";
+import {useErrorMessage, useInput, usePasswordType} from "../customHooks";
 import {PropTypes} from "prop-types";
 
 import './PasswordItem.css';
@@ -8,13 +7,13 @@ import './PasswordItem.css';
 const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
     const [accountName, controlAccountName] = useInput(data.accountName);
     const [password, controlPassword] = useInput(data.password);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const onSubmit = e => {
         e.preventDefault();
 
-        setErrorMessage('');
+        resetErrorMessage();
 
         if (!(accountName && password)) {
             setErrorMessage('Fill all fields, please');
@@ -48,7 +47,7 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
                        value="Delete"
                        onClick={() => onPasswordDelete()}/>
             </div>
-            {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+            {errorMessage}
         </form>
     );
 };

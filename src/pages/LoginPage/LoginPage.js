@@ -1,7 +1,6 @@
-import React, {useContext, useState} from "react";
-import {useInput, usePasswordType} from "../../components/customHooks";
+import React, {useContext} from "react";
+import {useErrorMessage, useInput, usePasswordType} from "../../components/customHooks";
 import FirebaseContext from "../../components/FireBaseContext";
-import ErrorMessage from "../../components/ErrorMessage";
 import {PropTypes} from "prop-types";
 import {withRouter} from "react-router-dom";
 import {DASHBOARD} from "../../constants/routes";
@@ -12,12 +11,12 @@ const LoginPage = ({history}) => {
     const firebase = useContext(FirebaseContext);
     const [email, emailControl] = useInput('');
     const [password, passwordControl] = useInput('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const handleLogin = async e => {
         e.preventDefault();
-        setErrorMessage('');
+        resetErrorMessage();
 
         try {
             await firebase.login(email, password);
@@ -46,7 +45,7 @@ const LoginPage = ({history}) => {
                 {inputTypeChangingBtn}
                 <input className="btn btn-outline-success mx-auto" type="submit"/>
             </form>
-            {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+            {errorMessage}
         </div>
     )
 };

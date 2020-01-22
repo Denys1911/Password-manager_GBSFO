@@ -1,6 +1,6 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
+import {useErrorMessage} from "../customHooks";
 import {withRouter} from "react-router-dom";
-import ErrorMessage from "../ErrorMessage";
 import {PropTypes} from "prop-types";
 import FirebaseContext from "../FireBaseContext";
 import {HOME} from "../../constants/routes";
@@ -9,10 +9,10 @@ import './UserControls.css';
 
 const UserControls = ({history}) => {
     const firebase = useContext(FirebaseContext);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
 
     const handleClick = async (func) => {
-        setErrorMessage('');
+        resetErrorMessage();
 
         try {
             await func();
@@ -33,7 +33,7 @@ const UserControls = ({history}) => {
             <button className="btn btn-danger" onClick={handleUserDeletion}>
                 Delete account
             </button>
-            {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+            {errorMessage}
         </div>
     )
 };

@@ -1,7 +1,6 @@
-import React, {useContext, useState} from "react";
-import {useInput, usePasswordType} from "../../components/customHooks";
+import React, {useContext} from "react";
+import {useErrorMessage, useInput, usePasswordType} from "../../components/customHooks";
 import FirebaseContext from "../../components/FireBaseContext";
-import ErrorMessage from "../../components/ErrorMessage";
 import {withRouter} from "react-router-dom";
 import {PropTypes} from "prop-types";
 import {DASHBOARD} from "../../constants/routes";
@@ -13,12 +12,12 @@ const RegisterPage = ({history}) => {
     const [name, nameControl] = useInput('');
     const [email, emailControl] = useInput('');
     const [password, passwordControl] = useInput('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
     const handleRegistration = async e => {
         e.preventDefault();
-        setErrorMessage('');
+        resetErrorMessage();
 
         if (!name) {
             setErrorMessage('Fill all fields, please');
@@ -58,7 +57,7 @@ const RegisterPage = ({history}) => {
                 {inputTypeChangingBtn}
                 <input className="btn btn-outline-success mx-auto" type="submit"/>
             </form>
-            {errorMessage ? <ErrorMessage message={errorMessage}/> : null}
+            {errorMessage}
         </div>
     );
 };
