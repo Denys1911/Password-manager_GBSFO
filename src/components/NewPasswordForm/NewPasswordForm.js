@@ -1,13 +1,14 @@
 import React, {useState} from "react";
 import {usePasswordType} from "../customHooks/usePasswordType";
+import {useInput} from "../customHooks/useInput";
 import ErrorMessage from "../ErrorMessage";
 import {PropTypes} from "prop-types";
 
 import './NewPasswordForm.css';
 
 const NewPasswordForm = ({onPasswordCreate}) => {
-    const [accountName, setAccountName] = useState('');
-    const [password, setPassword] = useState('');
+    const [accountName, controlAccountName, resetAccountName] = useInput('');
+    const [password, controlPassword, resetPassword] = useInput('');
     const [errorMessage, setErrorMessage] = useState('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
 
@@ -21,8 +22,8 @@ const NewPasswordForm = ({onPasswordCreate}) => {
         }
 
         onPasswordCreate(accountName, password);
-        setAccountName('');
-        setPassword('');
+        resetAccountName();
+        resetPassword();
     };
 
     return (
@@ -32,15 +33,13 @@ const NewPasswordForm = ({onPasswordCreate}) => {
                 Account name:
                 <input className="form-control"
                        type="text"
-                       value={accountName}
-                       onChange={e => setAccountName(e.target.value)}/>
+                       {...controlAccountName}/>
             </label>
             <label>
                 Password:
                 <input className="form-control"
                        type={passwordInputType}
-                       value={password}
-                       onChange={e => setPassword(e.target.value)}/>
+                       {...controlPassword}/>
             </label>
             {inputTypeChangingBtn}
             <input className="btn btn-outline-primary col-md-6"

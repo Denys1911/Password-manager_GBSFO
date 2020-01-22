@@ -5,14 +5,15 @@ import ErrorMessage from "../../components/ErrorMessage";
 import {withRouter} from "react-router-dom";
 import {PropTypes} from "prop-types";
 import {DASHBOARD} from "../../constants/routes";
+import {useInput} from "../../components/customHooks/useInput";
 
 import './RegisterPage.css';
 
 const RegisterPage = ({history}) => {
     const firebase = useContext(FirebaseContext);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [name, nameControl] = useInput('');
+    const [email, emailControl] = useInput('');
+    const [password, passwordControl] = useInput('');
     const [errorMessage, setErrorMessage] = useState('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
 
@@ -41,22 +42,19 @@ const RegisterPage = ({history}) => {
                     Name:
                     <input className="form-control"
                            type="text"
-                           value={name}
-                           onChange={e => setName(e.target.value)}/>
+                           {...nameControl}/>
                 </label>
                 <label>
                     Email:
                     <input className="form-control"
                            type="text"
-                           value={email}
-                           onChange={e => setEmail(e.target.value)}/>
+                           {...emailControl}/>
                 </label>
                 <label>
                     Password:
                     <input className="form-control"
                            type={passwordInputType}
-                           value={password}
-                           onChange={e => setPassword(e.target.value)}/>
+                           {...passwordControl}/>
                 </label>
                 {inputTypeChangingBtn}
                 <input className="btn btn-outline-success mx-auto" type="submit"/>

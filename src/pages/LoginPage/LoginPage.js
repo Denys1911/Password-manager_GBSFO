@@ -5,13 +5,14 @@ import ErrorMessage from "../../components/ErrorMessage";
 import {PropTypes} from "prop-types";
 import {withRouter} from "react-router-dom";
 import {DASHBOARD} from "../../constants/routes";
+import {useInput} from "../../components/customHooks/useInput";
 
 import './LoginPage.css';
 
 const LoginPage = ({history}) => {
     const firebase = useContext(FirebaseContext);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, emailControl] = useInput('');
+    const [password, passwordControl] = useInput('');
     const [errorMessage, setErrorMessage] = useState('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
 
@@ -35,15 +36,13 @@ const LoginPage = ({history}) => {
                     Email:
                     <input className="form-control"
                            type="text"
-                           value={email}
-                           onChange={e => setEmail(e.target.value)}/>
+                           {...emailControl}/>
                 </label>
                 <label>
                     Password:
                     <input className="form-control"
                            type={passwordInputType}
-                           value={password}
-                           onChange={e => setPassword(e.target.value)}/>
+                           {...passwordControl}/>
                 </label>
                 {inputTypeChangingBtn}
                 <input className="btn btn-outline-success mx-auto" type="submit"/>

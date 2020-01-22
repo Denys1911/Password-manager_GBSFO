@@ -1,13 +1,14 @@
 import React, {useState} from "react";
-import ErrorMessage from "../ErrorMessage";
 import {usePasswordType} from "../customHooks/usePasswordType";
+import {useInput} from "../customHooks/useInput";
+import ErrorMessage from "../ErrorMessage";
 import {PropTypes} from "prop-types";
 
 import './PasswordItem.css';
 
 const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
-    const [accountName, setAccountName] = useState(data.accountName);
-    const [password, setPassword] = useState(data.password);
+    const [accountName, controlAccountName] = useInput(data.accountName);
+    const [password, controlPassword] = useInput(data.password);
     const [errorMessage, setErrorMessage] = useState('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType();
 
@@ -30,15 +31,13 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
                 Account name:
                 <input className="form-control"
                        type="text"
-                       value={accountName}
-                       onChange={e => setAccountName(e.target.value)}/>
+                       {...controlAccountName}/>
             </label>
             <label>
                 Password:
                 <input className="form-control"
                        type={passwordInputType}
-                       value={password}
-                       onChange={e => setPassword(e.target.value)}/>
+                       {...controlPassword}/>
             </label>
             <div className="d-flex justify-content-center password-item-buttons">
                 {inputTypeChangingBtn}
