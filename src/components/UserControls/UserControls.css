@@ -1,0 +1,9 @@
+.user-controls {
+    padding: 2rem;
+    background-color: #fff4d2;
+}
+
+.user-controls button {
+    width: 9rem;
+    margin: 1rem;
+}

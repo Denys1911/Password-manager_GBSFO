@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
-import PasswordItem from "../../components/PasswordItem";
 import Spinner from "../../components/Spinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import NewPasswordForm from "../../components/NewPasswordForm";
 import UserControls from "../../components/UserControls";
 import FirebaseContext from "../../components/FireBaseContext";
+import DashboardPanel from "../../components/DashboardPanel";
 
 import './DashboardPage.css';
 
@@ -50,33 +50,16 @@ const DashboardPage = () => {
         setData(currentData => currentData.filter(item => item.id !== id));
     };
 
-    const allPasswords = data && data.length ?
-        data.map(({id, ...rest}) => (
-            <li key={id} className="list-group-item">
-                <PasswordItem data={rest}
-                              onPasswordUpdate={handlePasswordUpdate(id)}
-                              onPasswordDelete={() => handlePasswordDeletion(id)}/>
-            </li>)
-        ) : <li className="list-group-item empty-data">No passwords created yet</li>;
-
-    const dashboardPanel = !isDataReceived ? <Spinner/> : (
-        <>
-            <h2>
-                Welcome to your dashboard, <span className="text-success">{firebase.getCurrentUsername()}</span>!
-            </h2>
-            <ul className="list-group">
-                {allPasswords}
-            </ul>
-        </>
-    );
-
     return !errorMessage ? (
         <>
             <div className="jumbotron d-flex flex-column text-center mb-0 dashboard">
-                <div className="dashboard-panel">
-                    {dashboardPanel}
+                <div className="dashboard-panel-wrapper">
+                    {!isDataReceived ? <Spinner /> : <DashboardPanel data={data}
+                                                                     handlePasswordUpdate={handlePasswordUpdate}
+                                                                     handlePasswordDeletion={handlePasswordDeletion}/>
+                    }
                 </div>
-                <hr className="horizontal"/>
+                <hr/>
                 <NewPasswordForm onPasswordCreate={handleNewPasswordCreation}/>
             </div>
             <UserControls/>

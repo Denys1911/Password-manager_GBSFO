@@ -26,7 +26,7 @@ const UserControls = ({history}) => {
     const handleUserDeletion = () => handleClick(firebase.deleteUser);
 
     return (
-        <div className="text-center dashboard-btn-group">
+        <div className="text-center user-controls">
             <button className="btn btn-info" onClick={handleLogout}>
                 Logout
             </button>

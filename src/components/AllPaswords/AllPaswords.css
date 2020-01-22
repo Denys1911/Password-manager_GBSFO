@@ -1,0 +1,19 @@
+.list-group-item {
+    margin: .7rem 0;
+    border-radius: 1.5rem;
+}
+
+.list-group .list-group-item:first-child {
+    border-top-right-radius: 1.5rem;
+    border-top-left-radius: 1.5rem;
+}
+
+.list-group .list-group-item:last-child {
+    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+.empty-data {
+    margin-top: 4rem;
+    font-size: 1.3rem;
+}

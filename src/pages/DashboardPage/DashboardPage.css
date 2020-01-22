@@ -1,44 +1,10 @@
-.dashboard h2 {
-    font-size: 1.7rem;
-}
-
-.dashboard-btn-group {
-    padding: 2rem;
-    background-color: #fff4d2;
-}
-
-.dashboard-btn-group button {
-    width: 9rem;
-    margin: 1rem;
-}
-
-.dashboard-panel {
+.dashboard-panel-wrapper {
     min-height: 15rem;
 }
 
-.list-group-item {
-    margin: .7rem 0;
-    border-radius: 1.5rem;
-}
-
-.list-group .list-group-item:first-child {
-    border-top-right-radius: 1.5rem;
-    border-top-left-radius: 1.5rem;
-}
-
-.list-group .list-group-item:last-child {
-    border-bottom-right-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-}
-
-.horizontal {
+.dashboard hr {
     margin: 2rem auto;
     width: 70vw;
     height: 1px;
     background-color: #2C3E50;
-}
-
-.empty-data {
-    margin-top: 4rem;
-    font-size: 1.3rem;
 }
