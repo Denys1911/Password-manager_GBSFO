@@ -1,34 +1,17 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useCallback} from "react";
+import {usePasswordsData} from "../../components/customHooks";
 import Spinner from "../../components/Spinner";
 import ErrorMessage from "../../components/ErrorMessage";
 import NewPasswordForm from "../../components/NewPasswordForm";
 import UserControls from "../../components/UserControls";
-import FirebaseContext from "../../components/FireBaseContext";
 import DashboardPanel from "../../components/DashboardPanel";
 
 import './DashboardPage.css';
 
 const DashboardPage = () => {
-    const firebase = useContext(FirebaseContext);
-    const [isDataReceived, setIsDataReceived] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-    const [data, setData] = useState([]);
+    const [isDataReceived, errorMessage, data, setData] = usePasswordsData();
 
-    useEffect(() => {
-        if (!isDataReceived) {
-            firebase.getCurrentUserPasswords()
-                .then(data => {
-                    data = Array.isArray(data) ? data : [];
-                    setData(data);
-                    setIsDataReceived(true);
-                })
-                .catch(err => setErrorMessage(err));
-        } else {
-            firebase.setUserPasswords(data);
-        }
-    }, [data, isDataReceived, firebase]);
-
-    const handleNewPasswordCreation = (accountName, password) => {
+    const handleNewPasswordCreation = useCallback((accountName, password) => {
         setData(currentData => {
             const newPasswordObj = {
                 accountName,
@@ -38,17 +21,17 @@ const DashboardPage = () => {
 
             return currentData ? [...currentData, newPasswordObj] : [newPasswordObj]
         });
-    };
+    }, [setData]);
 
-    const handlePasswordUpdate = id => (accountName, password) => {
+    const handlePasswordUpdate = useCallback(id => (accountName, password) => {
         setData(currentData => currentData.map(item => {
             return item.id === id ? {id, accountName, password} : item;
         }));
-    };
+    }, [setData]);
 
-    const handlePasswordDeletion = id => {
+    const handlePasswordDeletion = useCallback(id => {
         setData(currentData => currentData.filter(item => item.id !== id));
-    };
+    }, [setData]);
 
     return !errorMessage ? (
         <>
