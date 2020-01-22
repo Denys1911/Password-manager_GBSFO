@@ -21,5 +21,5 @@ export const usePasswordType = () => {
     const inputTypeChangingBtn = passwordInputType === 'password' ? getBtn(setTypeText, 'Reveal password')
         : getBtn(setTypePassword, 'Hide password');
 
-    return {passwordInputType, inputTypeChangingBtn};
+    return [passwordInputType, inputTypeChangingBtn];
 };
