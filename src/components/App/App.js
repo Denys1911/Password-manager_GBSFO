@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
+import {useCurrentAuthUser} from "../customHooks";
 import Header from "../Header/Header";
 import LoginPage from "../../pages/LoginPage";
 import RegisterPage from "../../pages/RegisterPage";
@@ -7,23 +8,14 @@ import HomePage from "../../pages/HomePage";
 import Spinner from "../Spinner";
 import ErrorBoundary from "../ErrorBoundary";
 import {BrowserRouter as Router, Route, Redirect} from "react-router-dom";
-import Firebase from "../../Firebase";
+import firebase from "../../Firebase";
 import FirebaseContext from "../FireBaseContext";
 import * as routes from '../../constants/routes';
 
 import './App.css';
 
 const App = () => {
-    const firebase = new Firebase();
-    const [loadingStatus, setLoadingStatus] = useState(true);
-    const [currentUser, setCurrentUser] = useState(null);
-
-    useEffect(() => {
-        firebase.auth.onAuthStateChanged(user => {
-            setLoadingStatus(false);
-            setCurrentUser(user);
-        });
-    }, [firebase.auth]);
+    const [loadingStatus, currentUser] = useCurrentAuthUser();
 
     return !loadingStatus ? (
         <ErrorBoundary>
