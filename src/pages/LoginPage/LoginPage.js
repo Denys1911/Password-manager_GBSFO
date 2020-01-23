@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useCallback, useContext} from "react";
 import {useErrorMessage, useInput, usePasswordType} from "../../components/customHooks";
 import FirebaseContext from "../../components/FireBaseContext";
 import {PropTypes} from "prop-types";
@@ -14,7 +14,7 @@ const LoginPage = ({history}) => {
     const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
-    const handleLogin = async e => {
+    const handleLogin = useCallback(async e => {
         e.preventDefault();
         resetErrorMessage();
 
@@ -24,7 +24,7 @@ const LoginPage = ({history}) => {
         } catch (e) {
             setErrorMessage(e.message);
         }
-    };
+    }, [history, email, password, firebase, resetErrorMessage, setErrorMessage]);
 
     return (
         <div className="jumbotron text-center login-page"

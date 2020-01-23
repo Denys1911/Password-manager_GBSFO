@@ -3,13 +3,9 @@ import React, {useState} from "react";
 const usePasswordType = initialType => {
     const [passwordInputType, setPasswordInputType] = useState(initialType);
 
-    const setTypePassword = () => {
-        setPasswordInputType('password');
-    };
+    const setTypePassword = () => setPasswordInputType('password');
 
-    const setTypeText = () => {
-        setPasswordInputType('text');
-    };
+    const setTypeText = () => setPasswordInputType('text');
 
     const getBtn = (fn, valueText) => (
         <input className="btn btn-outline-secondary password-type-btn"

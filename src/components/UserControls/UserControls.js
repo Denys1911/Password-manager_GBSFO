@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useCallback, useContext} from "react";
 import {useErrorMessage} from "../customHooks";
 import {withRouter} from "react-router-dom";
 import {PropTypes} from "prop-types";
@@ -11,7 +11,7 @@ const UserControls = ({history}) => {
     const firebase = useContext(FirebaseContext);
     const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
 
-    const handleClick = async (func) => {
+    const handleClick = useCallback(async func => {
         resetErrorMessage();
 
         try {
@@ -20,10 +20,15 @@ const UserControls = ({history}) => {
         } catch (e) {
             setErrorMessage(e.message);
         }
-    };
+    }, [history, setErrorMessage, resetErrorMessage]);
 
-    const handleLogout = () => handleClick(firebase.logout);
-    const handleUserDeletion = () => handleClick(firebase.deleteUser);
+    const handleLogout = useCallback(
+        () => handleClick(firebase.logout), [handleClick, firebase.logout]
+    );
+
+    const handleUserDeletion = useCallback(
+        () => handleClick(firebase.deleteUser), [handleClick, firebase.deleteUser]
+    );
 
     return (
         <div className="text-center user-controls">

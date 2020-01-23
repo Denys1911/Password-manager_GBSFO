@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import PasswordItem from "../PasswordItem";
 import {PropTypes} from "prop-types";
 
@@ -21,4 +21,4 @@ AllPasswords.propTypes = {
     handlePasswordDeletion: PropTypes.func
 };
 
-export default AllPasswords;
+export default memo(AllPasswords);

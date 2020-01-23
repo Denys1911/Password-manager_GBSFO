@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback, memo} from "react";
 import {useErrorMessage, useInput, usePasswordType} from "../customHooks";
 import {PropTypes} from "prop-types";
 
@@ -10,7 +10,7 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
     const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
-    const onSubmit = e => {
+    const onSubmit = useCallback(e => {
         e.preventDefault();
 
         resetErrorMessage();
@@ -21,7 +21,7 @@ const PasswordItem = ({data, onPasswordDelete, onPasswordUpdate}) => {
         }
 
         onPasswordUpdate(accountName, password);
-    };
+    }, [resetErrorMessage, setErrorMessage, accountName, password, onPasswordUpdate]);
 
     return (
         <form className="password-item" onSubmit={onSubmit}>
@@ -58,4 +58,4 @@ PasswordItem.propTypes = {
     onPasswordUpdate: PropTypes.func
 };
 
-export default PasswordItem;
+export default memo(PasswordItem);

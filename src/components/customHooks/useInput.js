@@ -1,11 +1,11 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 
 const useInput = initialValue => {
     const [value, setValue] = useState(initialValue);
 
-    const resetValue = () => {
+    const resetValue = useCallback(() => {
         setValue(initialValue);
-    };
+    }, [initialValue]);
 
     const inputControl = {
         value,

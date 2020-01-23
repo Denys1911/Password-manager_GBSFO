@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useCallback, useContext} from "react";
 import {useErrorMessage, useInput, usePasswordType} from "../../components/customHooks";
 import FirebaseContext from "../../components/FireBaseContext";
 import {withRouter} from "react-router-dom";
@@ -15,7 +15,7 @@ const RegisterPage = ({history}) => {
     const [errorMessage, setErrorMessage, resetErrorMessage] = useErrorMessage('');
     const [passwordInputType, inputTypeChangingBtn] = usePasswordType('password');
 
-    const handleRegistration = async e => {
+    const handleRegistration = useCallback(async e => {
         e.preventDefault();
         resetErrorMessage();
 
@@ -30,7 +30,7 @@ const RegisterPage = ({history}) => {
         } catch (e) {
             setErrorMessage(e.message);
         }
-    };
+    }, [history, name, email, password, firebase, resetErrorMessage, setErrorMessage]);
 
     return (
         <div className="jumbotron text-center register-page">

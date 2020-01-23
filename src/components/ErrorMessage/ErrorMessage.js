@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import {PropTypes} from "prop-types";
 
 import './ErrorMessage.css';
@@ -13,4 +13,4 @@ ErrorMessage.propTypes = {
     message: PropTypes.string
 };
 
-export default ErrorMessage;
+export default memo(ErrorMessage);
